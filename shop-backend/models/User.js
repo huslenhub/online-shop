@@ -1,24 +1,33 @@
-// models/User.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// 사용자 스키마 정의
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+  username: {
+    type: String,
+    required: true,
+    unique: true, // 아이디는 고유해야 함
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false, // 기본값은 false로 설정
+  },
 });
 
-// 비밀번호 암호화
+// 비밀번호 해싱 미들웨어
 userSchema.pre('save', async function (next) {
-  if (this.isModified('password')) {
-    this.password = await bcrypt.hash(this.password, 10);
-  }
+  if (!this.isModified('password')) return next(); // 비밀번호가 수정되지 않은 경우 건너뜀
+  this.password = await bcrypt.hash(this.password, 10); // 비밀번호 해싱
   next();
 });
 
-// 비밀번호 비교 메서드
-userSchema.methods.comparePassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
+// 비밀번호 비교 메소드
+userSchema.methods.comparePassword = function (candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password);
 };
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+module.exports = User;

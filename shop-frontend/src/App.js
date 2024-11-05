@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import AdminDashboard from './pages/AdminDashboard';
+import ProtectedComponent from './components/ProtectedComponent';
 
 const App = () => {
   const [cart, setCart] = useState([]);

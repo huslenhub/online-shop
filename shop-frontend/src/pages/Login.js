@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 const Login = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState(''); // 이메일 대신 사용자명으로 변경
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
@@ -15,14 +15,14 @@ const Login = ({ onLogin }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }), // 아이디로 변경
       });
 
       const data = await response.json();
 
       if (response.ok) {
         localStorage.setItem('token', data.token); // 토큰 저장
-        onLogin({ email }); // 부모 컴포넌트에 사용자 정보 전달
+        onLogin({ username }); // 부모 컴포넌트에 사용자 정보 전달
         setMessage('로그인 성공!');
       } else {
         setMessage(data.message);
@@ -38,8 +38,8 @@ const Login = ({ onLogin }) => {
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
-          <label>Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <label>Username:</label> {/* 이메일 대신 사용자명으로 변경 */}
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
         </div>
         <div>
           <label>Password:</label>
