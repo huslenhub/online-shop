@@ -100,7 +100,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '100vh',
-    backgroundColor: '#f0f2f5',
+    backgroundColor: '#D4B681',
   },
   signupBox: {
     width: '100%',
@@ -144,7 +144,7 @@ const styles = {
     padding: '10px',
     borderRadius: '4px',
     border: 'none',
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#F6D394',
     color: '#fff',
     fontSize: '16px',
     fontWeight: 'bold',

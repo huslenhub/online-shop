@@ -38,8 +38,10 @@ const ProductDetail = ({ addToCart }) => {
       <h2>{product.name}</h2>
       <p>{product.description}</p>
       <p style={styles.price}>${product.price}</p>
-      <button style={styles.button} onClick={() => addToCart(product)}>Add to Cart</button>
-      <button onClick={handleBuyNow}>구매</button>
+        <div style={styles.buttonContainer}>
+          <button style={styles.button} onClick={() => addToCart(product)}>Add to Cart</button>
+          <button style={styles.button} onClick={handleBuyNow}>구매</button>
+        </div>
       </div>
   );
 };
@@ -62,9 +64,19 @@ const styles = {
     margin: '10px 0',
   },
   button: {
-    padding: '10px 20px',
-    fontSize: '1rem',
+    marginTop: '10px',
+    padding: '8px 16px',
+    border: 'none',
+    backgroundColor: '#F2AF38',
+    color: 'black',
+    borderRadius: '25px',
     cursor: 'pointer',
+    marginRight: '10px',
+  },
+  buttonContainer: {
+    display: 'flex',          // 버튼들을 나란히 배치
+    justifyContent: 'center', // 가운데 정렬
+    gap: '10px',              // 버튼들 사이에 10px 공백 추가
   },
 };
 
